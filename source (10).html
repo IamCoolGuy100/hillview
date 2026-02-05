@@ -1,426 +1,444 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-            <style></style>
-        </head>
-        <body data-new-gr-c-s-check-loaded="14.1092.0" data-gr-ext-installed="">
-            
-
-
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>State of Hillview</title>
-  <!-- Bootstrap CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <!-- Custom CSS -->
+  <title>Compound Interest Calculator</title>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600;700&display=swap" rel="stylesheet">
   <style>
+    :root {
+      color-scheme: light;
+      --bg: #f5f7fb;
+      --card: #ffffff;
+      --text: #1f2a37;
+      --muted: #55647a;
+      --primary: #2f6fed;
+      --primary-dark: #2152b8;
+      --border: #dfe6f0;
+      --accent: #e6efff;
+      --success: #0b8a4d;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
     body {
-      background-color: #f8f9fa;
-      color: #333;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      font-family: "Manrope", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--text);
     }
-    /* Navigation */
-    .navbar {
-      background-color: #000;
+
+    header {
+      background: linear-gradient(135deg, #1f4bd1, #4f7ef4);
+      color: #fff;
+      padding: 64px 20px 72px;
     }
-    .navbar-brand,
-    .nav-link {
-      color: #fff !important;
+
+    .container {
+      width: min(1100px, 92%);
+      margin: 0 auto;
     }
-    .nav-link:hover {
-      color: #0d6efd !important;
-    }
-    /* Hero Section */
+
     .hero {
-      background: url('https://source.unsplash.com/1600x900/?city,night') no-repeat center center/cover;
-      height: 100vh;
-      position: relative;
-    }
-    .hero-overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.65);
-      display: flex;
-      justify-content: center;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 32px;
       align-items: center;
-      text-align: center;
-      padding: 0 20px;
     }
+
     .hero h1 {
-      font-size: 4rem;
-      font-weight: bold;
-      color: #fff;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      margin: 0 0 16px;
     }
+
     .hero p {
-      font-size: 1.25rem;
-      color: #ddd;
+      margin: 0 0 20px;
+      color: rgba(255, 255, 255, 0.85);
+      font-size: 1.1rem;
     }
-    .btn-discord {
-      background-color: #5865F2;
-      border: none;
-      color: #fff;
-      font-weight: bold;
+
+    .hero .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.18);
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 0.9rem;
+      letter-spacing: 0.2px;
     }
-    .section-title {
-      border-bottom: 2px solid #0d6efd;
-      padding-bottom: 10px;
-      margin-bottom: 30px;
-      color: #0d6efd;
+
+    main {
+      padding: 40px 0 80px;
     }
+
     .card {
-      background-color: #fff;
-      border: 1px solid #e3e3e3;
+      background: var(--card);
+      border-radius: 18px;
+      box-shadow: 0 18px 50px rgba(20, 40, 80, 0.08);
+      padding: 28px;
+      border: 1px solid var(--border);
     }
-    .card a {
-      text-decoration: none;
-      color: #0d6efd;
+
+    .calculator {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px;
     }
-    .card a:hover {
-      text-decoration: underline;
+
+    form {
+      display: grid;
+      gap: 16px;
     }
-    /* Inquiries Section */
-    #inquiries {
-      background-color: #fff;
-      color: #333;
+
+    label {
+      font-weight: 600;
+      font-size: 0.95rem;
+      display: block;
+      margin-bottom: 8px;
     }
-    #inquiries .form-control, 
-    #inquiries .btn {
-      border-radius: 0;
+
+    input, select {
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      font-size: 1rem;
+      font-family: inherit;
+      background: #fff;
+      color: var(--text);
     }
-    /* Footer */
-    footer {
-      background-color: #000;
+
+    input:focus, select:focus {
+      outline: 2px solid rgba(47, 111, 237, 0.35);
+      border-color: var(--primary);
+    }
+
+    .inline {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 12px;
+    }
+
+    button {
+      padding: 12px 18px;
+      border-radius: 12px;
+      border: none;
+      background: var(--primary);
       color: #fff;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+
+    button:hover {
+      background: var(--primary-dark);
+    }
+
+    .result {
+      display: grid;
+      gap: 18px;
+    }
+
+    .result .summary {
+      background: var(--accent);
+      border-radius: 16px;
+      padding: 20px;
+    }
+
+    .summary h2 {
+      margin: 0 0 8px;
+      font-size: 1.4rem;
+    }
+
+    .summary p {
+      margin: 4px 0;
+      color: var(--muted);
+    }
+
+    .summary .amount {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-top: 10px;
+    }
+
+    .breakdown {
+      display: grid;
+      gap: 12px;
+      font-size: 0.95rem;
+    }
+
+    .breakdown div {
+      display: flex;
+      justify-content: space-between;
+      padding-bottom: 10px;
+      border-bottom: 1px dashed var(--border);
+    }
+
+    .breakdown div:last-child {
+      border-bottom: none;
+    }
+
+    .table-wrapper {
+      overflow-x: auto;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.95rem;
+    }
+
+    th, td {
+      padding: 12px 14px;
+      text-align: right;
+      border-bottom: 1px solid var(--border);
+    }
+
+    th {
+      text-align: left;
+      background: #f3f6fb;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    tbody tr:last-child td {
+      border-bottom: none;
+    }
+
+    .note {
+      color: var(--muted);
+      font-size: 0.95rem;
+      margin-top: 14px;
+    }
+
+    footer {
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.9rem;
+      margin-top: 50px;
+    }
+
+    @media (max-width: 720px) {
+      header {
+        padding: 48px 20px 60px;
+      }
+
+      .hero {
+        text-align: center;
+      }
+
+      .hero .pill {
+        justify-content: center;
+      }
+
+      .breakdown div {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+      }
+
+      th, td {
+        text-align: left;
+      }
     }
   </style>
-
-
-  <!-- Navigation -->
-  <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
-    <div class="container">
-      <a class="navbar-brand" href="#">State of Hillview</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item"><a class="nav-link" href="#discord">Discord</a></li>
-          <li class="nav-item"><a class="nav-link" href="#departments">Departments</a></li>
-          <li class="nav-item"><a class="nav-link" href="#members">Members</a></li>
-          <li class="nav-item"><a class="nav-link" href="#resources">Resources</a></li>
-          <li class="nav-item"><a class="nav-link" href="#regulations">Regulations</a></li>
-          <li class="nav-item"><a class="nav-link" href="#inquiries">Inquiries/Report</a></li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-
-  <!-- Hero Section -->
-  <section class="hero">
-    <div class="hero-overlay">
+</head>
+<body>
+  <header>
+    <div class="container hero">
       <div>
-        <h1>State of Hillview</h1>
-        <p class="lead">An immersive role-play experience</p>
-        <a href="#discord" class="btn btn-discord btn-lg mt-4">Join our Discord</a>
+        <div class="pill">📈 Smart Savings Tool</div>
+        <h1>Compound Interest Calculator</h1>
+        <p>Estimate how your money grows with compounding interest, optional monthly contributions, and flexible compounding schedules.</p>
+      </div>
+      <div class="card">
+        <h2>Formula</h2>
+        <p><strong>Future Value</strong> = P(1 + r/n)<sup>nt</sup> + PMT × <span>( (1 + r/n)<sup>nt</sup> − 1 ) / (r/n)</span></p>
+        <p class="note">P = principal, r = annual rate, n = compounds per year, t = years, PMT = contribution each period.</p>
       </div>
     </div>
-  </section>
+  </header>
 
-  <!-- Discord Section -->
-  <section id="discord" class="py-5" style="background-color: #e9ecef;">
-    <div class="container">
-      <div class="row justify-content-center">
-        <div class="col-md-8 text-center">
-          <h2 class="section-title">Hillview Discord</h2>
-          <p class="mb-4">Join our official Discord to stay updated on all things related to State of Hillview.</p>
-          <a href="https://discord.gg/mV4BYxYN" class="btn btn-discord btn-lg" target="_blank">Join Now</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Departments Section -->
-  <section id="departments" class="py-5">
-    <div class="container">
-      <h2 class="section-title text-center">Departments</h2>
-      <div class="row g-4">
-        <!-- Criminal/Traffic Code -->
-        <div class="col-md-4">
-          <div class="card p-3 h-100">
-            <h4 class="card-title">Criminal/Traffic Code</h4>
-            <p class="card-text">Access the full code for criminal and traffic regulations.</p>
-            <a href="https://docs.google.com/spreadsheets/d/1VZ5vjWUv32liq88-F5MOA6ScAQF1jWtT3zKgchTcRq0/htmlview" target="_blank">View Code</a>
+  <main>
+    <div class="container card">
+      <div class="calculator">
+        <form id="interest-form" novalidate>
+          <div>
+            <label for="principal">Initial deposit</label>
+            <input type="number" id="principal" name="principal" min="0" step="0.01" value="5000" required>
           </div>
-        </div>
-        <!-- Arling Falls Police Department -->
-        <div class="col-md-4">
-          <div class="card p-3 h-100">
-            <h4 class="card-title">Arling Falls Police Department</h4>
-            <p class="card-text">Join the police department's Discord for law enforcement role-play.</p>
-            <a href="https://discord.gg/arnt5AtY2Q" target="_blank">Join Discord</a>
+          <div>
+            <label for="rate">Annual interest rate (%)</label>
+            <input type="number" id="rate" name="rate" min="0" step="0.01" value="6" required>
           </div>
-        </div>
-        <!-- Hillview Law Enforcement Training Institute -->
-        <div class="col-md-4">
-          <div class="card p-3 h-100">
-            <h4 class="card-title">Hillview Law Enforcement Training Institute</h4>
-            <p class="card-text">Training and resources for aspiring law enforcement officers.</p>
-            <a href="https://discord.gg/ASMrCvkwyw" target="_blank">Join Discord</a>
-          </div>
-        </div>
-        <!-- Sunridge County Fire Department -->
-        <div class="col-md-4">
-          <div class="card p-3 h-100">
-            <h4 class="card-title">Sunridge County Fire Department</h4>
-            <p class="card-text">Connect with the fire department for emergency role-play.</p>
-            <a href="https://discord.gg/tb2gSQdtE8" target="_blank">Join Discord</a>
-          </div>
-        </div>
-        <!-- Hillview Public Safety Careers -->
-        <div class="col-md-4">
-          <div class="card p-3 h-100">
-            <h4 class="card-title">Hillview Public Safety Careers</h4>
-            <p class="card-text">Opportunities and career resources within public safety.</p>
-            <a href="https://discord.gg/WqWnMSWEK3" target="_blank">Join Discord</a>
-          </div>
-        </div>
-        <!-- Sunridge County Sheriff's Office -->
-        <div class="col-md-4">
-          <div class="card p-3 h-100">
-            <h4 class="card-title">Sunridge County Sheriff's Office</h4>
-            <p class="card-text">Join the sheriff’s office and maintain law and order.</p>
-            <a href="https://discord.gg/nSZbQFbwAj" target="_blank">Join Discord</a>
-          </div>
-        </div>
-        <!-- Moderation Discord -->
-        <div class="col-md-4 mx-auto">
-          <div class="card p-3 h-100">
-            <h4 class="card-title">Moderation Discord</h4>
-            <p class="card-text">For staff and moderators to coordinate and enforce rules.</p>
-            <a href="https://discord.gg/cm957R96fH" target="_blank">Join Discord</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Members Section -->
-  <section id="members" class="py-5" style="background-color: #e9ecef;">
-    <div class="container">
-      <h2 class="section-title text-center">Members</h2>
-      <div class="row">
-        <!-- Founder -->
-        <div class="col-md-4 mb-4">
-          <div class="card p-3">
-            <h4 class="card-title">Founder</h4>
-            <p class="card-text">Markus21Alpha</p>
-          </div>
-        </div>
-        <!-- Co-Founders -->
-        <div class="col-md-4 mb-4">
-          <div class="card p-3">
-            <h4 class="card-title">Co-Founders</h4>
-            <p class="card-text">Densit_y, Javier</p>
-          </div>
-        </div>
-        <!-- Developers -->
-        <div class="col-md-12 mb-4">
-          <div class="card p-3">
-            <h4 class="card-title">Developers</h4>
-            <ul class="list-unstyled mb-0">
-              <li><strong>HiddenAiden</strong> – Lead Scripter</li>
-              <li><strong>Micadile</strong> – Asset Developer / Road Developer</li>
-              <li><strong>ManslyYT</strong> – Interior Developer</li>
-              <li><strong>meltedlizzard223</strong></li>
-              <li><strong>700x74</strong> – Asset Builder</li>
-              <li><strong>Detective_Chase458</strong> – Uniform Developer</li>
-              <li><strong>Slippery_Builder</strong> – Builder</li>
-              <li><strong>Jayma</strong> – Contributor</li>
-              <li><strong>SweetChiIiSauce</strong></li>
-              <li><strong>visanpro10</strong> – Modeler</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Resources Section -->
-  <section id="resources" class="py-5">
-    <div class="container">
-      <h2 class="section-title text-center">State of Hillview Links &amp; Resources</h2>
-      <div class="row g-4">
-        <div class="col-md-6">
-          <div class="card p-3 h-100">
-            <h5>Criminal/Traffic Code (HTML View)</h5>
-            <a href="https://docs.google.com/spreadsheets/d/1VZ5vjWUv32liq88-F5MOA6ScAQF1jWtT3zKgchTcRq0/htmlview" target="_blank">View Document</a>
-          </div>
-        </div>
-        <div class="col-md-6">
-          <div class="card p-3 h-100">
-            <h5>Criminal Code (View)</h5>
-            <a href="https://docs.google.com/spreadsheets/d/1VZ5vjWUv32liq88-F5MOA6ScAQF1jWtT3zKgchTcRq0/view" target="_blank">View Document</a>
-          </div>
-        </div>
-        <div class="col-md-6">
-          <div class="card p-3 h-100">
-            <h5>Trello - Hillview Rules &amp; Guidelines</h5>
-            <a href="https://trello.com/b/f2Udiuh6/hillview-rules-guidelines" target="_blank">View Board</a>
-          </div>
-        </div>
-        <div class="col-md-6">
-          <div class="card p-3 h-100">
-            <h5>Trello - Moderation Action Hub</h5>
-            <a href="https://trello.com/b/v8jWL7je/state-of-hillview-moderation-action-hub" target="_blank">View Board</a>
-          </div>
-        </div>
-        <div class="col-md-6 mx-auto">
-          <div class="card p-3 h-100">
-            <h5>State of Hillview Residency Center</h5>
-            <a href="https://www.roblox.com/games/18473060342/State-of-Hillview-Residency-Center" target="_blank">Play Now</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Regulations Section -->
-  <section id="regulations" class="py-5" style="background-color: #e9ecef;">
-    <div class="container">
-      <h2 class="section-title text-center">State of Hillview Regulations</h2>
-      <p class="text-center mb-4">
-        In State of Hillview, rules are in place to ensure an immersive and fair role-playing experience. Read below for a summary of key regulations.
-      </p>
-      <div class="accordion" id="regulationsAccordion">
-        <!-- Regulation D-001 -->
-        <div class="accordion-item">
-          <h2 class="accordion-header" id="headingOne">
-            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-              D-001: Game Regulations &amp; RP Rules
-            </button>
-          </h2>
-          <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#regulationsAccordion">
-            <div class="accordion-body">
-              <ul>
-                <li>New Life Rule (NLR): Avoid re-engaging in scenarios that led to your demise.</li>
-                <li>Random DeathMatch (RDM): No unjustified killing.</li>
-                <li>Leaving/Murder/Resetting to Avoid Arrest (LTAA/MTAA/RTAA) are prohibited.</li>
-                <li>Spawn Killing, Ambushing RP, and Fail Role Play (FRP) are not allowed.</li>
-                <li>Infractions are subject to warnings, temporary bans, or permanent bans.</li>
-              </ul>
+          <div class="inline">
+            <div>
+              <label for="years">Years</label>
+              <input type="number" id="years" name="years" min="1" step="1" value="10" required>
+            </div>
+            <div>
+              <label for="frequency">Compounds per year</label>
+              <select id="frequency" name="frequency">
+                <option value="1">Annually</option>
+                <option value="2">Semiannually</option>
+                <option value="4">Quarterly</option>
+                <option value="12" selected>Monthly</option>
+                <option value="52">Weekly</option>
+                <option value="365">Daily</option>
+              </select>
             </div>
           </div>
-        </div>
-        <!-- Regulation D-002 -->
-        <div class="accordion-item">
-          <h2 class="accordion-header" id="headingTwo">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-              D-002: General Gameplay Rules
-            </button>
-          </h2>
-          <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#regulationsAccordion">
-            <div class="accordion-body">
-              <ul>
-                <li>Trolling, cop baiting, and toxicity are not permitted.</li>
-                <li>Exploiting glitches, threats, and stealing assets are strictly forbidden.</li>
-                <li>Alternate accounts to bypass rules are prohibited.</li>
-                <li>Players must adhere to Roblox Terms of Service.</li>
-              </ul>
-            </div>
+          <div>
+            <label for="contribution">Contribution per period (optional)</label>
+            <input type="number" id="contribution" name="contribution" min="0" step="0.01" value="100">
           </div>
-        </div>
-        <!-- Regulation D-003 -->
-        <div class="accordion-item">
-          <h2 class="accordion-header" id="headingThree">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-              D-003: Discord Rules
-            </button>
-          </h2>
-          <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#regulationsAccordion">
-            <div class="accordion-body">
-              <ul>
-                <li>No toxicity, harassment, or hate speech.</li>
-                <li>Respectful communication and no spamming.</li>
-                <li>Follow staff instructions and post in appropriate channels.</li>
-                <li>Any violation may result in immediate bans.</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+          <button type="submit">Calculate growth</button>
+        </form>
 
-  <!-- Inquiries/Report Section -->
-  <section id="inquiries" class="py-5">
+        <section class="result" aria-live="polite">
+          <div class="summary">
+            <h2>Projected balance</h2>
+            <p id="timeline">10 years of growth with monthly compounding.</p>
+            <div class="amount" id="future-value">$0.00</div>
+          </div>
+          <div class="breakdown">
+            <div>
+              <span>Total contributions</span>
+              <strong id="total-contributions">$0.00</strong>
+            </div>
+            <div>
+              <span>Total interest earned</span>
+              <strong id="total-interest">$0.00</strong>
+            </div>
+            <div>
+              <span>Initial deposit</span>
+              <strong id="initial-deposit">$0.00</strong>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <h3 style="margin-top: 40px;">Year-by-year breakdown</h3>
+      <div class="table-wrapper" aria-live="polite">
+        <table>
+          <thead>
+            <tr>
+              <th>Year</th>
+              <th>Ending balance</th>
+              <th>Total contributions</th>
+              <th>Interest earned</th>
+            </tr>
+          </thead>
+          <tbody id="breakdown-body"></tbody>
+        </table>
+      </div>
+      <p class="note">Results assume contributions occur at the end of each compounding period.</p>
+    </div>
+  </main>
+
+  <footer>
     <div class="container">
-      <h2 class="section-title text-center">Inquiries / Report a Complaint</h2>
-      <p class="text-center mb-4">Have a question or need to report something? Fill out the form below.</p>
-      <div class="row justify-content-center">
-        <div class="col-md-8">
-          <form id="contact-form">
-            <div class="mb-3">
-              <label for="from_email" class="form-label">Your Email</label>
-              <input type="email" class="form-control" id="from_email" name="from_email" required="">
-            </div>
-            <div class="mb-3">
-              <label for="subject" class="form-label">Subject</label>
-              <input type="text" class="form-control" id="subject" name="subject" required="">
-            </div>
-            <div class="mb-3">
-              <label for="message" class="form-label">Message</label>
-              <textarea class="form-control" id="message" name="message" rows="5" required=""></textarea>
-            </div>
-            <button type="submit" class="btn btn-primary w-100">Send Inquiry</button>
-          </form>
-          <div id="form-status" class="mt-3 text-center"></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer class="py-4">
-    <div class="container text-center">
-      <p class="mb-0">© 2025 State of Hillview. All Rights Reserved.</p>
+      <p>Plan your savings goals with clarity. Adjust the inputs to see how time and rate changes impact growth.</p>
     </div>
   </footer>
 
-  <!-- Bootstrap JS Bundle (with Popper) -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-  <!-- EmailJS SDK -->
-  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
   <script>
-    // Initialize EmailJS with your user ID
-    (function(){
-      emailjs.init("YOUR_USER_ID"); // Replace with your EmailJS user ID
-    })();
+    const form = document.getElementById("interest-form");
+    const futureValueEl = document.getElementById("future-value");
+    const totalContributionsEl = document.getElementById("total-contributions");
+    const totalInterestEl = document.getElementById("total-interest");
+    const initialDepositEl = document.getElementById("initial-deposit");
+    const breakdownBody = document.getElementById("breakdown-body");
+    const timeline = document.getElementById("timeline");
 
-    // Contact form submission using EmailJS
-    document.getElementById('contact-form').addEventListener('submit', function(event) {
-      event.preventDefault();
-      
-      // Replace these with your EmailJS service and template IDs
-      const serviceID = 'YOUR_SERVICE_ID';
-      const templateID = 'YOUR_TEMPLATE_ID';
-
-      emailjs.sendForm(serviceID, templateID, this)
-        .then(function() {
-          document.getElementById('form-status').innerHTML = '<span class="text-success">Inquiry sent successfully!</span>';
-          document.getElementById('contact-form').reset();
-        }, function(error) {
-          document.getElementById('form-status').innerHTML = '<span class="text-danger">Failed to send inquiry. Please try again later.</span>';
-          console.error('EmailJS Error:', error);
-        });
+    const formatter = new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: "USD",
+      maximumFractionDigits: 2,
     });
+
+    const computeSchedule = ({ principal, rate, years, frequency, contribution }) => {
+      const ratePerPeriod = rate / 100 / frequency;
+      const totalPeriods = years * frequency;
+      let balance = principal;
+      let totalContribution = principal;
+      const rows = [];
+
+      for (let period = 1; period <= totalPeriods; period += 1) {
+        balance = balance * (1 + ratePerPeriod);
+        if (contribution > 0) {
+          balance += contribution;
+          totalContribution += contribution;
+        }
+
+        if (period % frequency === 0) {
+          const year = period / frequency;
+          rows.push({
+            year,
+            ending: balance,
+            contributions: totalContribution,
+            interest: balance - totalContribution,
+          });
+        }
+      }
+
+      return {
+        ending: balance,
+        totalContribution,
+        interest: balance - totalContribution,
+        rows,
+      };
+    };
+
+    const updateResults = () => {
+      const principal = Number(form.principal.value) || 0;
+      const rate = Number(form.rate.value) || 0;
+      const years = Number(form.years.value) || 0;
+      const frequency = Number(form.frequency.value) || 1;
+      const contribution = Number(form.contribution.value) || 0;
+
+      const { ending, totalContribution, interest, rows } = computeSchedule({
+        principal,
+        rate,
+        years,
+        frequency,
+        contribution,
+      });
+
+      futureValueEl.textContent = formatter.format(ending);
+      totalContributionsEl.textContent = formatter.format(totalContribution);
+      totalInterestEl.textContent = formatter.format(interest);
+      initialDepositEl.textContent = formatter.format(principal);
+
+      const frequencyLabel = form.frequency.options[form.frequency.selectedIndex].textContent.toLowerCase();
+      timeline.textContent = `${years} year${years === 1 ? "" : "s"} of growth with ${frequencyLabel} compounding.`;
+
+      breakdownBody.innerHTML = rows
+        .map(
+          (row) => `
+            <tr>
+              <td>${row.year}</td>
+              <td>${formatter.format(row.ending)}</td>
+              <td>${formatter.format(row.contributions)}</td>
+              <td>${formatter.format(row.interest)}</td>
+            </tr>`
+        )
+        .join("");
+    };
+
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      updateResults();
+    });
+
+    updateResults();
   </script>
-
-
-
-            <script>// Write JavaScript here</script>
-        
-    
-</body><grammarly-desktop-integration data-grammarly-shadow-root="true"></grammarly-desktop-integration>
+</body>
+</html>
